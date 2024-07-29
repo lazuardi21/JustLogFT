@@ -1,0 +1,27 @@
+<div class="todo-container">
+    <h1>To-Do List</h1>
+    <form (ngSubmit)="addTask()" class="form-inline">
+      <input
+        type="text"
+        [(ngModel)]="newTaskDescription"
+        name="description"
+        placeholder="New task"
+        required
+      />
+      <button type="submit">Add Task</button>
+    </form>
+    <div class="task-grid">
+      <div class="task-item" *ngFor="let task of tasks; index as i">
+        <input type="checkbox" [checked]="task.completed" (change)="toggleTaskCompletion(task)">
+        <span [class.completed]="task.completed">
+          {{ task.description }}
+        </span>
+        <button (click)="deleteTask(i)" class="delete-button">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+    </div>
+    <!-- Message container -->
+    <div class="message" [class.show]="messageVisible">{{ message }}</div>
+  </div>
+  
